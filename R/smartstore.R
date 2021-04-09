@@ -13,7 +13,14 @@ checkSmartStore <- function(b) {
   code='#__next > div > div:nth-child(2) > div.mallList_mall_list__20gDk > div > div.mallFilter_btn_area__1uYIL > a.mallFilter_btn_smart__2AHAj'
   b %>% click(code)
 }
-collectNssItems <- function(b,p=1) {
+#static test
+collectNssItems <- function(p=1) {
+  u=sprintf('https://search.shopping.naver.com/allmall/api/allmall?page=%d&sortingOrder=prodClk&isSmartStore=Y',p)
+  page=read_html(u)
+  page %>% html_element('p') %>% html_text() %>% fromJSON()
+}
+#dynamic
+collectNssItems2 <- function(b,p=1) {
   u=sprintf('https://search.shopping.naver.com/allmall/api/allmall?page=%d&sortingOrder=prodClk&isSmartStore=Y',p)
   b %>% navigate(u)
   x=b$Runtime$evaluate('document.body.innerHTML')
@@ -21,4 +28,34 @@ collectNssItems <- function(b,p=1) {
   x1=read_html(x$result$value)
   x2=fromJSON(x1 %>% html_element('pre') %>% html_text())
   return(x2)
+}
+
+collect_smart_store<-function(stopping=NULL,politely=2) {
+  items_collected = list()
+  item=list()
+  page=1
+  while(TRUE) {
+    cat("Page..",page)
+    item=collectNssItems(page)
+    Sys.sleep(politely)
+    if(length(item)<=0) {
+      cat("no more page.\n")
+      break
+    }
+    if(!is.null(stopping)) {
+      if(page>=stopping) {
+        cat("stopping rule satisfied.\n")
+        break
+      }
+    }
+    items_collected[[page]]=item
+    page=page+1
+    cat("..OK..Next.\n")
+  }
+  result=bind_rows(items_collected)
+  cat("---------\n")
+  cat(' summary \n')
+  cat('N of rows =',nrow(result))
+  cat('\n')
+  result
 }

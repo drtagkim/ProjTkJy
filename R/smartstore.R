@@ -29,8 +29,11 @@ collectNssItems <- function(p=1,category=NULL) {
   if(!is.null(category)) {
     u=category(u) 
   }
-  page=read_html(u)
-  page %>% html_element('p') %>% html_text() %>% fromJSON()
+  rv=tryCatch({
+    page=read_html(u)
+    page %>% html_element('p') %>% html_text() %>% fromJSON()
+  },error=function(e) {NULL})
+  rv
 }
 
 

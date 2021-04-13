@@ -14,7 +14,7 @@ factoryChrome <- function(visible=FALSE) {
 }
 navigate <- function(b,u,waitSec=5) {
   invisible({
-    b$Page$navigate(u,wait_=FALSE)
+    b$Page$navigate(u,wait_ = FALSE)
     b$Page$loadEventFired()
     Sys.sleep(waitSec)
   })

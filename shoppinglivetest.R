@@ -7,6 +7,7 @@ library(rvest)
 library(chromote)
 library(httr)
 library(pbapply)
+library(furrr)
 
 # Functions ---------------------------------------------------------------
 

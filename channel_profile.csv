@@ -1,0 +1,51 @@
+broadcastOwnerId,serviceId,serviceName,broadcasterId,nickname,storeHomeEndUrl,isPlaceOwner,hasCollabo
+1,SELECTIVE,셀렉티브,5,kyusikshin,,FALSE,FALSE
+2,SELECTIVE,셀렉티브,6,splee,,FALSE,FALSE
+3,OUTLET,아울렛윈도,1000015762,아디다스,https://shopping.naver.com/outlink/storehome/1000015762,FALSE,FALSE
+4,SELECTIVE,셀렉티브,32,구구구,,FALSE,FALSE
+5,BEAUTY,뷰티윈도,100614161,뷰티테스트1_인디,https://shopping.naver.com/outlink/storehome/100614161,FALSE,FALSE
+6,LIVING_HOME_LIVING,리빙윈도 홈&데코,100537931,리빙테스트_홈앤데코,https://shopping.naver.com/outlink/storehome/100537931,FALSE,FALSE
+7,STOREFARM,스토어팜,100522216,롯데몰 진주점 토박스,https://smartstore.naver.com/main/stores/100522216,FALSE,FALSE
+8,SELECTIVE,셀렉티브,21149902,_thesext_,,FALSE,FALSE
+9,SELECTIVE,셀렉티브,3,별,,FALSE,FALSE
+10,SELECTIVE,셀렉티브,1331259,nnino,,FALSE,FALSE
+11,STOREFARM,스토어팜,500106421,웰모아 공식스토어,https://smartstore.naver.com/main/stores/500106421,FALSE,FALSE
+12,STOREFARM,스토어팜,100585091,은곡살림,https://smartstore.naver.com/main/stores/100585091,FALSE,FALSE
+13,STOREFARM,스토어팜,500272158,뉴트리,https://smartstore.naver.com/main/stores/500272158,FALSE,FALSE
+14,STOREFARM,스토어팜,100099980,WWWWWWWWWWWWWW,https://smartstore.naver.com/main/stores/100099980,FALSE,FALSE
+15,SELECTIVE,셀렉티브,2663454,jinasim,,FALSE,FALSE
+16,STOREFARM,스토어팜,100225562,adorn.live,https://smartstore.naver.com/main/stores/100225562,FALSE,FALSE
+17,STOREFARM,스토어팜,500155519,행복한형근이,https://smartstore.naver.com/main/stores/500155519,FALSE,FALSE
+18,STOREFARM,스토어팜,100524562,vivien,https://smartstore.naver.com/main/stores/100524562,FALSE,FALSE
+19,FOREIGN,해외직구,100229651,파리마레,https://shopping.naver.com/outlink/storehome/100229651,FALSE,FALSE
+20,DESIGNER,디자이너윈도,100043181,이민정 메이크디 MAKE:D,https://shopping.naver.com/outlink/storehome/100043181,FALSE,FALSE
+21,STOREFARM,스토어팜,500109455,삼형제고기,https://smartstore.naver.com/main/stores/500109455,FALSE,FALSE
+22,STOREFARM,스토어팜,100321312,앙팡앤맘,https://smartstore.naver.com/main/stores/100321312,FALSE,FALSE
+23,STOREFARM,스토어팜,100487931,여우천사,https://smartstore.naver.com/main/stores/100487931,FALSE,FALSE
+24,STOREFARM,스토어팜,100539839,흥흥종합슈퍼,https://smartstore.naver.com/main/stores/100539839,FALSE,FALSE
+25,STOREFARM,스토어팜,100688696,후지쇼핑,https://smartstore.naver.com/main/stores/100688696,FALSE,FALSE
+26,STOREFARM,스토어팜,500126835,바라던유통,https://smartstore.naver.com/main/stores/500126835,FALSE,FALSE
+27,STOREFARM,스토어팜,100331880,막타고,https://smartstore.naver.com/main/stores/100331880,FALSE,FALSE
+28,STOREFARM,스토어팜,100685796,패밀리 언더웨어,https://smartstore.naver.com/main/stores/100685796,FALSE,FALSE
+29,DEPARTMENT,백화점윈도,1000003291,파슨스,https://shopping.naver.com/outlink/storehome/1000003291,FALSE,FALSE
+30,STOREFARM,스토어팜,500052599,디카팩,https://smartstore.naver.com/main/stores/500052599,FALSE,FALSE
+31,STOREFARM,스토어팜,100461985,뮤직 센터,https://smartstore.naver.com/main/stores/100461985,FALSE,FALSE
+32,STOREFARM,스토어팜,100664038,새끼발가락,https://smartstore.naver.com/main/stores/100664038,FALSE,FALSE
+33,STOREFARM,스토어팜,500037006,프레시멘토,https://smartstore.naver.com/main/stores/500037006,FALSE,FALSE
+34,STOREFARM,스토어팜,500100562,와일드브로스,https://smartstore.naver.com/main/stores/500100562,FALSE,FALSE
+35,STOREFARM,스토어팜,100176636,청년푸드스토리,https://smartstore.naver.com/main/stores/100176636,FALSE,FALSE
+36,STOREFARM,스토어팜,500162868,스마트한쇼핑,https://smartstore.naver.com/main/stores/500162868,FALSE,FALSE
+37,STOREFARM,스토어팜,100025839,에이랩 A-LAB,https://smartstore.naver.com/main/stores/100025839,FALSE,FALSE
+38,STOREFARM,스토어팜,500195395,보니타하우스,https://smartstore.naver.com/main/stores/500195395,FALSE,FALSE
+39,STOREFARM,스토어팜,500049502,썬썬몰,https://smartstore.naver.com/main/stores/500049502,FALSE,FALSE
+41,STOREFARM,스토어팜,500098841,오박사닷컴,https://smartstore.naver.com/main/stores/500098841,FALSE,FALSE
+41,STOREFARM,스토어팜,500098841,오박사닷컴,https://smartstore.naver.com/main/stores/500098841,FALSE,FALSE
+42,STOREFARM,스토어팜,500042870,바디맵,https://smartstore.naver.com/main/stores/500042870,FALSE,FALSE
+43,STOREFARM,스토어팜,500001009,팜스토리푸드,https://smartstore.naver.com/main/stores/500001009,FALSE,FALSE
+44,STOREFARM,스토어팜,100458799,글로벌제이피 주식회사,https://smartstore.naver.com/main/stores/100458799,FALSE,FALSE
+45,STOREFARM,스토어팜,500215359,스타클럽,https://smartstore.naver.com/main/stores/500215359,FALSE,FALSE
+46,DEPARTMENT,백화점윈도,100678459,데상트골프,https://shopping.naver.com/outlink/storehome/100678459,FALSE,FALSE
+47,DEPARTMENT,백화점윈도,1000000530,듀엘,https://shopping.naver.com/outlink/storehome/1000000530,FALSE,FALSE
+48,STOREFARM,스토어팜,100040383,달달한여우,https://smartstore.naver.com/main/stores/100040383,FALSE,FALSE
+49,STOREFARM,스토어팜,100392214,LEN 샵,https://smartstore.naver.com/main/stores/100392214,FALSE,FALSE
+50,STOREFARM,스토어팜,500142461,현대무역 듀엘,https://smartstore.naver.com/main/stores/500142461,FALSE,FALSE

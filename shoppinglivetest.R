@@ -23,17 +23,25 @@ collectChannelProfile <- function(cid,politely=2,verbose=FALSE) {
   }
   Sys.sleep(politely)
   u=paste("https://apis.naver.com/selectiveweb/selectiveweb/my/",cid,"/live-channel-profile",sep='')
-  r=fromJSON(u)
+  r=tryCatch(fromJSON(u),error=function(e){
+      NULL
+    })
+  if(is.null(r)) {
+    if(verbose) {
+      cat("No.\n")
+    }
+    return(NULL)
+  }
   if(verbose) {
     cat("OK.\n")
-  } 
+  }
   tibble(
     broadcastOwnerId=r$broadcastOwnerId,
     serviceId=r$serviceId,
     serviceName=r$serviceName,
     broadcasterId=r$broadcasterId,
     nickname=r$nickname,
-    storeHomeEndUrl=r$storeHomeEndUrl,
+    storeHomeEndUrl=ifelse(is.null(r$storeHomeEndUrl),"",r$storeHomeEndUrl),
     isPlaceOwner=r$isPlaceOwner,
     hasCollabo=r$hasCollabo
   )
@@ -61,17 +69,33 @@ collectViedoItemsShoppingLive <- function(cid,politely=2,verbose=FALSE) {
   while(TRUE) {
     u1=buildShoppingLiveChannelVideoList(cid,nextItem = n)
     Sys.sleep(politely)
-    v1 = u1 %>% fromJSON()
-    r[[cnt]] = v1[[1]] #append
-    v1a = v1[[2]] #check next
-    if(is.null(v1a)) break
-    n=as.character(v1a)
-    if(verbose) {
-      cat("cnt:",cnt,"next:",n,"\n")
+    v1 = tryCatch({u1 %>% fromJSON()},error=function(e){NULL})
+    if(!is.null(v1)) {
+      v1data=v1[[1]]
+      broadcastOwnerId=cid
+      products=v1data$displayProduct
+      v1data$displayProduct=NULL
+      v1data=cbind(broadcastOwnerId,v1data)
+      if("broadcastId" %in% names(products)) {
+        products$status=NULL
+        v1data=left_join(v1data,products,by="broadcastId")
+      }
+      r[[cnt]] = v1data #append
+      v1a = v1[[2]] #check next
+      if(is.null(v1a)) break
+      n=as.character(v1a)
+      if(verbose) {
+        cat("cnt:",cnt,"next:",n,"\n")
+      }
+      cnt = cnt +1
+    } else {
+      if(verbose) {
+        cat("cnt:",cnt,"error\n")
+      }
+      break
     }
-    cnt = cnt +1
   }
-  bind_rows(r)
+  tryCatch(bind_rows(r),error=function(e) {NULL})
 }
 
 split_ids <- function(ids) {
@@ -104,9 +128,49 @@ collectViedoItemsShoppingLiveUserData <- function(sl,politely=2,verbose=FALSE) {
     Sys.sleep(politely)
     idsmarker=paste("ids=",x,sep="",collapse="&")
     uu=paste(pu,idsmarker,sep='')
-    fromJSON(uu)
+    r=tryCatch(fromJSON(uu),error=function(e) {NULL})
   })
   result
+}
+
+options(scipen=999)
+
+collectVideoComments <- function(vid=107958,politely=1) {
+  #vid=broadcst id
+  #politely=1 sleeping
+  comment_url=paste0("https://apis.naver.com/live_commerce_web/viewer_api_web/v1/broadcast/",
+                     vid,
+                     "/replays/comments?includeBeforeComment=false&size=100",sep='')
+  comment_test=list()
+  i=1
+  nextCommentId=NULL
+  while(TRUE) {
+    cat(".")
+    x1=parse_url(comment_url)
+    if(!is.null(nextCommentId)) {
+      x1$query$lastCommentNo=nextCommentId
+    }
+    x1=build_url(x1)
+    x2=tryCatch(fromJSON(x1),error=function(e) {NULL})
+    Sys.sleep(politely)
+    x3=x2$comments
+    if(!is.null(x3)) {
+      comment_test[[i]]=x3
+      x3comment=x3$commentNo[nrow(x3)]
+      i=i+1
+      if(!x2$hasNext) {
+        #if((!is.null(nextCommentId)) && nextCommentId==x3comment) {
+        cat("End\n")
+        break
+      }
+    }
+    if(i%%50==0) cat("Next\n")
+    nextCommentId=x2$lastCommentNo
+  }
+  comments=bind_rows(comment_test)
+  rv=comments %>% distinct()
+  rv$id=NULL
+  rv
 }
 
 # Test --------------------------------------------------------------------
@@ -146,12 +210,34 @@ saveRDS(test.12323,"channel_12323.RDS")
 saveRDS(test.12323.data,"channel_12323_videos.RDS")
 
 ###
+# test 1 to 100
+library(foreach)
+channel_profile_1_50=list()
+for(i in 1:50) {
+  channel_profile_1_50[[i]]=collectChannelProfile(i,verbose=TRUE)
+}
+channel_profile_1_50=bind_rows(channel_profile_1_50)
+View(channel_profile_1_50)
+#
+channel_data=list()
+for(i in 1:50) {
+  channel_data[[i]]=collectViedoItemsShoppingLive(i,politely=2,verbose=TRUE)
+}
+channel_data=bind_rows(channel_data)
+#
+channel_data_extra=channel_data %>%
+  collectViedoItemsShoppingLiveUserData(verbose=TRUE) %>%
+  bind_rows()
+channel_data_binded=channel_data %>% left_join(channel_data_extra,by='broadcastId')
+readr::write_csv(channel_data_binded,'channel_data_binded.csv')
+readr::write_csv(channel_profile_1_50,'channel_profile.csv')
 
-test.12323.bid = unique(test.12323$broadcastId)
 
 
+# Comment -----------------------------------------------------------------
 
+v1=collectVideoComments()
+v2=collectVideoComments(92721)
+saveRDS(v2,"comment92721.RDS")
 
-length(test.12323.bid)
-test=split_ids(test.12323.bid)
-v1=collectViedoItemsShoppingLiveUserData(test.12323.bid) %>% bind_rows()
+clipr::write_clip(v2)

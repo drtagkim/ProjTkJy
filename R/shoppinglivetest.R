@@ -22,11 +22,12 @@ collectChannelProfile <- function(cid,politely=2,verbose=FALSE) {
   if(verbose) {
     cat("Channel:",cid,"profile...")
   }
-  Sys.sleep(politely)
+  
   u=paste("https://apis.naver.com/selectiveweb/selectiveweb/my/",cid,"/live-channel-profile",sep='')
   r=tryCatch(fromJSON(u),error=function(e){
       NULL
     })
+  Sys.sleep(politely)
   if(is.null(r)) {
     if(verbose) {
       cat("No.\n")
@@ -220,6 +221,10 @@ for(i in 1:50) {
 channel_profile_1_50=bind_rows(channel_profile_1_50)
 View(channel_profile_1_50)
 #
+
+
+
+
 channel_data=list()
 for(i in 1:50) {
   channel_data[[i]]=collectViedoItemsShoppingLive(i,politely=2,verbose=TRUE)
